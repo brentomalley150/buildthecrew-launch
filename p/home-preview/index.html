@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>BuildtheCrew — Which Home screen do you like?</title>
-<meta name="description" content="Seven versions of the top of the BuildtheCrew Home screen. Tell us which letter you like best.">
-<meta property="og:title" content="Which BuildtheCrew Home screen do you like?">
-<meta property="og:description" content="Look at seven versions and text us the letter you like best.">
+<title>BuildtheCrew — Which Home screen works best?</title>
+<meta name="description" content="A 5-second test and three versions of the BuildtheCrew Home screen. Text us what you see and which version you like.">
+<meta property="og:title" content="Which BuildtheCrew Home screen works best?">
+<meta property="og:description" content="Take a 5-second look, then text us what you saw and which version you like.">
 <meta property="og:type" content="website">
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,23 +23,30 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 32px max(16px, env(safe-area-inset-right, 0px)) 56px max(16px, env(safe-area-inset-left, 0px)); }
   .brand { font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-text); margin: 0 0 8px; }
   h1 { font-size: clamp(26px, 5vw, 34px); line-height: 1.15; margin: 0 0 12px; text-wrap: balance; letter-spacing: -.01em; }
-  .intro { max-width: 640px; margin-bottom: 28px; }
-  .intro p { margin: 0 0 10px; color: var(--ink-soft); font-size: 16px; }
-  .ask { display: flex; gap: 12px; align-items: flex-start; background: var(--teal-tint); border-radius: 14px; padding: 14px 16px; margin-top: 16px; color: var(--ink); font-size: 16px; }
-  .ask strong { color: var(--teal-text); }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-  .opt { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-  .opt.today { border: 2px solid var(--teal); }
+  h2 { font-size: 21px; line-height: 1.25; margin: 0 0 6px; }
+  .intro { max-width: 640px; margin-bottom: 24px; }
+  .intro p, .step p { margin: 0 0 10px; color: var(--ink-soft); font-size: 16px; }
+  .step { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 20px; margin-bottom: 24px; }
+  .stepnum { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--teal-text); margin-bottom: 4px; }
+  button.go { font: inherit; font-weight: 700; color: #fff; background: var(--coral); border: 0; border-radius: 12px; padding: 12px 20px; min-height: 48px; cursor: pointer; }
+  button.go:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+  .flash { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 14px; }
+  .flash img { width: 100%; max-width: 340px; height: auto; border-radius: 24px; border: 1px solid var(--border); }
+  .count { font-size: 15px; font-weight: 700; color: var(--teal-text); }
+  .ask { background: var(--teal-tint); border-radius: 14px; padding: 14px 16px; margin-top: 14px; font-size: 16px; color: var(--ink); }
+  .ask ol { margin: 6px 0 0; padding-left: 22px; }
+  .ask .code { display: inline-block; font-weight: 800; color: #fff; background: var(--teal); border-radius: 8px; padding: 0 8px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 16px; }
+  .opt { border: 1px solid var(--border); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; background: var(--bg); }
   .head { display: flex; align-items: center; gap: 12px; }
   .letter { flex: none; width: 44px; height: 44px; border-radius: 22px; background: var(--teal); color: #fff; font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
-  .opt h2 { margin: 0; font-size: 17px; line-height: 1.3; }
-  .tag { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--teal-text); background: var(--teal-tint); padding: 2px 8px; border-radius: 999px; margin-top: 2px; }
+  .opt h3 { margin: 0; font-size: 17px; line-height: 1.3; }
   .opt p { margin: 0; color: var(--ink-soft); font-size: 14px; }
   .shot { display: block; width: 100%; max-width: 340px; height: auto; margin: 4px auto 0; border-radius: 24px; border: 1px solid var(--border); background: #fff; }
-  footer { margin-top: 36px; max-width: 640px; }
+  footer { margin-top: 32px; max-width: 640px; }
   footer p { color: var(--ink-soft); font-size: 15px; margin: 0 0 8px; }
   footer .small { font-size: 13px; }
 </style>
@@ -48,54 +55,109 @@
 <main class="wrap">
   <header class="intro">
     <p class="brand">BuildtheCrew</p>
-    <h1>Which Home screen do you like best?</h1>
-    <p>We're redesigning the top of the app's Home screen. Each picture is the same screen for a made-up family caring for "Margaret". Only the top part changes, plus the small yellow "Needs you most" tag.</p>
-    <p><strong>A</strong> is the app as it is today.</p>
-    <div class="ask"><span><strong>Reply to the text that sent you this link with the letter you like best</strong>, and anything you'd change. One letter is plenty.</span></div>
+    <h1>Which Home screen works best?</h1>
+    <p>We're redesigning the top of the app's Home screen. It takes about 2 minutes. The family in the pictures is made up: they're helping care for "Margaret".</p>
   </header>
 
-  <div class="grid">
-    <article class="opt today">
-      <div class="head"><span class="letter" aria-hidden="true">A</span><div><h2>Today's app</h2><span class="tag">Today</span></div></div>
-      <p>A near-white top with the greeting, then "Caring for Margaret". Darker gold "Needs you most" tag.</p>
-      <img class="shot" src="img/A.jpg" width="506" height="1100" alt="Option A, today's app: near-white top with Hi Jamie and Caring for Margaret">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">B</span><h2>Light teal band</h2></div>
-      <p>A pale teal band sets the top apart. Smaller circle, lighter yellow tag.</p>
-      <img class="shot" src="img/B.jpg" width="506" height="1100" alt="Option B: pale teal band behind the greeting and Caring for Margaret" loading="lazy">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">C</span><h2>Thin line between</h2></div>
-      <p>Same band, with a thin line separating "Hi Jamie" from "Caring for Margaret".</p>
-      <img class="shot" src="img/C.jpg" width="506" height="1100" alt="Option C: thin line between the greeting and Caring for Margaret" loading="lazy">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">D</span><h2>Two strips</h2></div>
-      <p>The greeting sits on a teal strip; "Caring for Margaret" gets its own white strip below.</p>
-      <img class="shot" src="img/D.jpg" width="506" height="1100" alt="Option D: greeting on a teal strip, Caring for Margaret on a white strip" loading="lazy">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">E</span><h2>Name tag card</h2></div>
-      <p>"Caring for Margaret" sits on a white card inside the teal band.</p>
-      <img class="shot" src="img/E.jpg" width="506" height="1100" alt="Option E: Caring for Margaret on a white card inside the teal band" loading="lazy">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">F</span><h2>Margaret first</h2></div>
-      <p>One block: "Caring for Margaret", with "Hi Jamie" as a small line underneath. The shortest top.</p>
-      <img class="shot" src="img/F.jpg" width="506" height="1100" alt="Option F: Caring for Margaret first, Hi Jamie as a small line under it" loading="lazy">
-    </article>
-    <article class="opt">
-      <div class="head"><span class="letter" aria-hidden="true">G</span><h2>Bolder greeting</h2></div>
-      <p>"Hi Jamie" is larger and teal, with more space before "Caring for Margaret".</p>
-      <img class="shot" src="img/G.jpg" width="506" height="1100" alt="Option G: larger teal greeting with more space above Caring for Margaret" loading="lazy">
-    </article>
-  </div>
+  <section class="step" aria-labelledby="s1">
+    <span class="stepnum">Step 1 · 5-second look</span>
+    <h2 id="s1">Glance at a screen, then tell us what you saw</h2>
+    <p>Tap the button. A Home screen appears for 5 seconds, then disappears. Don't study it; just look the way you would when opening the app.</p>
+    <button type="button" class="go" id="start">Show me a screen</button>
+    <p style="margin:10px 0 0;font-size:14px"><a href="#s2" id="skip">Skip this and just pick one</a></p>
+    <div class="flash" id="flash" hidden>
+      <span class="count" id="count" aria-live="polite">5</span>
+      <img id="flashImg" alt="A version of the Home screen, shown for 5 seconds">
+    </div>
+    <div class="ask" id="after" hidden>
+      <strong>Now text us your answers:</strong>
+      <ol>
+        <li>Whose screen was that? Who is it about?</li>
+        <li>What would you tap first?</li>
+      </ol>
+      <p style="margin:8px 0 0">Start your text with <span class="code" id="seen">A</span> so we know which version you saw.</p>
+    </div>
+  </section>
+
+  <section class="step" aria-labelledby="s2" id="step2" hidden>
+    <span class="stepnum">Step 2 · Pick one</span>
+    <h2 id="s2">Which do you like best?</h2>
+    <p>The same screen three ways. Only the top part changes. <strong>Reply to the text that sent you this link with the letter you like best</strong>, and anything you'd change.</p>
+    <div class="grid" id="grid"></div>
+  </section>
 
   <footer>
-    <p><strong>Reply to the text you got with your letter.</strong> Thank you for helping us make BuildtheCrew better.</p>
+    <p><strong>Thank you!</strong> Your answers help us make BuildtheCrew clearer for families.</p>
     <p class="small">The people and tasks in these pictures are made up. © Build the Crew Inc.</p>
   </footer>
 </main>
+
+<script>
+  var VERSIONS = [
+    { id: 'A', title: "Today's app", img: 'img/today.jpg',
+      desc: '"Hi Jamie · Coordinating" first, then "Caring for Margaret" below it.' },
+    { id: 'B', title: 'Margaret first', img: 'img/margaret-first.jpg',
+      desc: '"Caring for Margaret" first, with "Hi Jamie · Coordinating" as a small line underneath.' },
+    { id: 'C', title: 'Just Margaret', img: 'img/caring-for.jpg',
+      desc: 'A small "Caring for" label above Margaret\'s name. No greeting line, so the top is shortest.' }
+  ];
+
+  // Shuffle per visitor so no version always comes first (order affects which one people pick).
+  function shuffled(list) {
+    var a = list.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  // Step 2 stays hidden until Step 1 is done (or skipped), so the 5-second look isn't spoiled.
+  function showStep2() { document.getElementById('step2').hidden = false; }
+  document.getElementById('skip').addEventListener('click', function (e) {
+    e.preventDefault();
+    document.getElementById('skip').parentNode.hidden = true;
+    showStep2();
+    document.getElementById('step2').scrollIntoView({ block: 'start', behavior: 'auto' });
+  });
+
+  var grid = document.getElementById('grid');
+  shuffled(VERSIONS).forEach(function (v) {
+    var card = document.createElement('article');
+    card.className = 'opt';
+    card.innerHTML =
+      '<div class="head"><span class="letter" aria-hidden="true">' + v.id + '</span><h3>' + v.title + '</h3></div>' +
+      '<p>' + v.desc + '</p>' +
+      '<img class="shot" src="' + v.img + '" width="506" height="1100" loading="lazy" alt="Version ' + v.id + ': ' + v.title + '">';
+    grid.appendChild(card);
+  });
+
+  // Step 1: show one random version for 5 seconds, then hide it.
+  var pick = VERSIONS[Math.floor(Math.random() * VERSIONS.length)];
+  var flashImg = document.getElementById('flashImg');
+  flashImg.src = pick.img; // preload so the 5 seconds start with the picture on screen
+  var startBtn = document.getElementById('start');
+  startBtn.addEventListener('click', function () {
+    startBtn.hidden = true;
+    document.getElementById('skip').parentNode.hidden = true;
+    var flash = document.getElementById('flash');
+    var count = document.getElementById('count');
+    flash.hidden = false;
+    flash.scrollIntoView({ block: 'start', behavior: 'auto' });
+    var left = 5;
+    count.textContent = left + ' seconds';
+    var timer = setInterval(function () {
+      left -= 1;
+      if (left > 0) { count.textContent = left + (left === 1 ? ' second' : ' seconds'); return; }
+      clearInterval(timer);
+      flash.hidden = true;
+      document.getElementById('seen').textContent = pick.id;
+      var after = document.getElementById('after');
+      after.hidden = false;
+      showStep2();
+      after.scrollIntoView({ block: 'center', behavior: 'auto' });
+    }, 1000);
+  });
+</script>
 </body>
 </html>
