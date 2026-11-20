@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>BuildtheCrew · Caring for Mom takes a crew</title>
+<meta name="description" content="Kira, the helper inside BuildtheCrew, notices what's slipping, who's carrying too much, and what each person in the family could do next. Your family decides. On iPhone and Android.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Colors match the app's Tier 2 tokens (crewcares2 src/services/config.js). */
+  :root {
+    --teal: #2f7d86; --teal-text: #245e66; --teal-tint: #e9f2f2; --teal-line: #d3e3e4;
+    --coral: #b84a33; --coral-dark: #9a3c28; --coral-tint: #fbece7;
+    --amber: #8a5510; --amber-tint: #f6e7c9;
+    --green: #3b6d11; --green-tint: #e8f2da;
+    --ink: #2b2825; --ink-soft: #57524c; --ink-quiet: #847d75;
+    --paper: #fdfcfa; --warm: #f6f4f1; --line: #e7e1d8; --white: #ffffff;
+    --purple: #867fb0; --shadow: 0 1px 3px rgba(40,30,20,.05), 0 12px 32px rgba(40,30,20,.07);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; font-size: 17px; }
+  a { color: var(--teal-text); }
+  h1, h2, h3 { margin: 0; letter-spacing: -.02em; text-wrap: balance; line-height: 1.15; }
+  p { margin: 0; }
+  .container { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
+  .eyebrow { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--teal-text); }
+  :focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; border-radius: 6px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+
+  /* Preview banner (remove before this replaces the homepage) */
+  .preview-bar { background: var(--ink); color: #fff; font-size: 13px; text-align: center; padding: 8px 16px; }
+  .preview-bar a { color: #fff; }
+
+  /* Nav */
+  .nav { position: sticky; top: 0; z-index: 50; background: rgba(253,252,250,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .nav .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--teal-text); text-decoration: none; }
+  .brand .badge { width: 30px; height: 30px; border-radius: 8px; background: var(--teal); display: grid; place-items: center; }
+  .nav-links { display: flex; align-items: center; gap: 22px; font-size: 15px; }
+  .nav-links a { color: var(--ink-soft); text-decoration: none; font-weight: 500; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links .cta { background: var(--coral); color: #fff; font-weight: 600; padding: 9px 18px; border-radius: 999px; }
+  .nav-links .cta:hover { background: var(--coral-dark); color: #fff; }
+  @media (max-width: 700px) { .nav-links a:not(.cta) { display: none; } }
+
+  /* Buttons */
+  .btn { display: inline-flex; align-items: center; gap: 8px; background: var(--coral); color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; padding: 14px 28px; border-radius: 999px; transition: background .15s, transform .15s; }
+  .btn:hover { background: var(--coral-dark); transform: translateY(-1px); }
+  .btn.ghost { background: transparent; color: var(--teal-text); border: 1.5px solid var(--teal-line); }
+  .btn.ghost:hover { background: var(--teal-tint); }
+
+  /* Hero */
+  .hero { background: linear-gradient(170deg, var(--teal-tint) 0%, var(--paper) 75%); padding: 64px 0 72px; }
+  .hero .container { display: grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items: center; }
+  .hero h1 { font-size: 48px; font-weight: 800; }
+  .hero h1 .kira-word { color: var(--teal); }
+  .hero .lede { font-size: 19px; color: var(--ink-soft); margin: 20px 0 28px; max-width: 540px; }
+  .hero .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .hero .note { font-size: 14px; color: var(--ink-quiet); margin-top: 16px; }
+  .hero-visual { display: flex; flex-direction: column; gap: 12px; }
+  .hero-visual .caption { font-size: 13px; color: var(--ink-quiet); text-align: center; }
+  @media (max-width: 860px) { .hero .container { grid-template-columns: 1fr; gap: 36px; } .hero h1 { font-size: 36px; } }
+
+  /* Kira card (mirrors the app's Kira priority card) */
+  .kcard { background: var(--white); border: 1px solid var(--teal-line); border-left: 5px solid var(--teal); border-radius: 16px; padding: 18px 20px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 10px; font-size: 15.5px; text-align: left; }
+  .kcard .khead { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--teal-text); }
+  .kcard .khead .spark { color: var(--teal); font-size: 15px; }
+  .pill { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 3px 10px; border-radius: 999px; margin-left: auto; white-space: nowrap; }
+  .pill.amber { background: var(--amber-tint); color: var(--amber); }
+  .pill.green { background: var(--green-tint); color: var(--green); }
+  .pill.teal { background: var(--teal-tint); color: var(--teal-text); }
+  .kcard .ktitle { font-weight: 700; font-size: 16.5px; }
+  .kcard .based { font-size: 13px; color: var(--ink-soft); background: var(--warm); border-radius: 10px; padding: 9px 12px; }
+  .kcard .based b { font-size: 11px; letter-spacing: .08em; color: var(--ink-quiet); display: block; margin-bottom: 2px; }
+  .kcard ul { margin: 0; padding-left: 1.1em; display: flex; flex-direction: column; gap: 4px; }
+  .kbtns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .kb { font-size: 14px; font-weight: 600; padding: 8px 16px; border-radius: 999px; border: 1.5px solid var(--line); color: var(--ink); background: var(--white); }
+  .kb.go { background: var(--coral); border-color: var(--coral); color: #fff; }
+  .kb.link { border: 0; padding-left: 0; color: var(--teal-text); background: none; }
+
+  /* Sections */
+  .section { padding: 80px 0; }
+  .section.alt { background: var(--warm); }
+  .section-head { max-width: 680px; margin-bottom: 44px; display: flex; flex-direction: column; gap: 12px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-head h2 { font-size: 36px; font-weight: 800; }
+  .section-head p { font-size: 18px; color: var(--ink-soft); }
+  @media (max-width: 680px) { .section { padding: 56px 0; } .section-head h2 { font-size: 28px; } }
+
+  /* Problem */
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split .text { display: flex; flex-direction: column; gap: 16px; font-size: 18px; color: var(--ink-soft); }
+  .split .text h2 { font-size: 36px; font-weight: 800; color: var(--ink); }
+  .split .text strong { color: var(--ink); }
+  @media (max-width: 860px) { .split { grid-template-columns: 1fr; gap: 32px; } .split .text h2 { font-size: 28px; } }
+  .chat-mock { max-width: 340px; margin: 0 auto; width: 100%; background: var(--white); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow: hidden; }
+  .chat-head { background: var(--warm); padding: 12px 16px; font-weight: 600; font-size: 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; }
+  .chat-head .unread { font-size: 11px; font-weight: 700; color: #fff; background: var(--coral); border-radius: 999px; padding: 2px 9px; }
+  .chat-body { padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+  .bubble { max-width: 82%; font-size: 14px; padding: 8px 12px; border-radius: 14px; line-height: 1.4; }
+  .bubble.l { background: var(--warm); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .bubble.r { background: var(--teal-tint); align-self: flex-end; border-bottom-right-radius: 4px; }
+  .bubble .nm { font-size: 10.5px; font-weight: 700; color: var(--ink-quiet); margin-bottom: 2px; }
+
+  /* Meet Kira moments */
+  .moments { display: flex; flex-direction: column; gap: 64px; }
+  .moment { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .moment:nth-child(even) .mtext { order: 2; }
+  .mtext { display: flex; flex-direction: column; gap: 12px; }
+  .mtext .num { font-size: 13px; font-weight: 700; color: var(--teal-text); background: var(--teal-tint); align-self: flex-start; padding: 4px 12px; border-radius: 999px; }
+  .mtext h3 { font-size: 28px; font-weight: 800; }
+  .mtext p { font-size: 17.5px; color: var(--ink-soft); }
+  .mtext .aside { font-size: 15px; color: var(--ink-quiet); border-left: 3px solid var(--teal-line); padding-left: 12px; }
+  .mvisual { display: flex; flex-direction: column; gap: 12px; max-width: 440px; width: 100%; justify-self: center; }
+  @media (max-width: 860px) { .moment { grid-template-columns: 1fr; gap: 24px; } .moment:nth-child(even) .mtext { order: 0; } .mtext h3 { font-size: 24px; } }
+
+  /* Same week, three people */
+  .people { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 20px; }
+  .person { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+  .person .who { display: flex; align-items: center; gap: 12px; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .a-maya { background: var(--purple); } .a-dan { background: var(--teal); } .a-pat { background: #5e8f1c; }
+  .person .who b { display: block; font-size: 16px; }
+  .person .who span { font-size: 13.5px; color: var(--ink-quiet); }
+  .person .kcard { flex: 1; }
+  .person .feel { font-size: 14px; font-weight: 600; color: var(--teal-text); text-align: center; }
+  @media (max-width: 900px) { .people { grid-template-columns: 1fr; max-width: 460px; margin: 0 auto; } }
+
+  /* Trust */
+  .trust-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; }
+  .trust-item { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 24px; display: flex; gap: 16px; }
+  .trust-item .ic { width: 40px; height: 40px; border-radius: 12px; background: var(--teal-tint); color: var(--teal); display: grid; place-items: center; flex-shrink: 0; }
+  .trust-item h3 { font-size: 18px; margin-bottom: 4px; }
+  .trust-item p { font-size: 15.5px; color: var(--ink-soft); }
+  @media (max-width: 760px) { .trust-grid { grid-template-columns: 1fr; } }
+
+  /* Loved one */
+  .ask-mock { max-width: 360px; margin: 0 auto; width: 100%; background: var(--white); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 22px; display: flex; flex-direction: column; gap: 12px; }
+  .ask-mock .hi { font-size: 20px; font-weight: 700; }
+  .ask-mock .field { border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; font-size: 15px; color: var(--ink); background: var(--paper); }
+  .ask-mock .send { background: var(--coral); color: #fff; font-weight: 600; text-align: center; padding: 12px; border-radius: 12px; }
+  .ask-mock .sub { font-size: 13px; color: var(--ink-quiet); }
+
+  /* Where Kira works */
+  .tools { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 14px; }
+  .tool { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: flex; flex-direction: column; gap: 6px; }
+  .tool h3 { font-size: 17px; }
+  .tool p { font-size: 15px; color: var(--ink-soft); }
+  .tool .kira-adds { font-size: 13.5px; color: var(--teal-text); border-top: 1px dashed var(--teal-line); padding-top: 8px; margin-top: auto; }
+  @media (max-width: 900px) { .tools { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+  @media (max-width: 480px) { .tools { grid-template-columns: 1fr; } }
+
+  /* Get started */
+  .start { background: linear-gradient(160deg, var(--teal) 0%, var(--teal-text) 100%); color: #fff; border-radius: 28px; padding: 52px 48px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .start h2 { font-size: 34px; font-weight: 800; }
+  .start .lead { color: #e3f0f1; font-size: 18px; margin-top: 12px; }
+  .start ol { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; counter-reset: s; }
+  .start li { counter-increment: s; display: flex; gap: 14px; align-items: baseline; font-size: 16.5px; }
+  .start li::before { content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,.18); display: grid; place-items: center; font-weight: 700; font-size: 14px; flex-shrink: 0; transform: translateY(4px); }
+  .start li span { color: #e3f0f1; }
+  .stores { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 28px; }
+  .store { display: flex; align-items: center; gap: 12px; background: #111; color: #fff; text-decoration: none; border-radius: 14px; padding: 12px 16px; transition: transform .15s; }
+  .store:hover { transform: translateY(-2px); }
+  .store svg { flex-shrink: 0; }
+  .store .lbl { display: flex; flex-direction: column; line-height: 1.2; }
+  .store .lbl small { font-size: 11.5px; opacity: .8; }
+  .store .lbl span { font-size: 16px; font-weight: 600; }
+  .start .fine { font-size: 13.5px; color: #d6e8ea; margin-top: 14px; }
+  @media (max-width: 860px) { .start { grid-template-columns: 1fr; padding: 36px 24px; gap: 28px; } .start h2 { font-size: 28px; } }
+  @media (max-width: 420px) { .stores { grid-template-columns: 1fr; } }
+
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
+  .faq details { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 4px 20px; }
+  .faq summary { cursor: pointer; font-weight: 600; font-size: 17px; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: "+"; color: var(--teal); font-weight: 700; font-size: 20px; line-height: 1; }
+  .faq details[open] summary::after { content: "–"; }
+  .faq details p { color: var(--ink-soft); padding-bottom: 16px; font-size: 16px; }
+
+  footer { text-align: center; padding: 48px 0 56px; color: var(--ink-quiet); font-size: 14px; display: flex; flex-direction: column; gap: 6px; }
+  footer .fb { font-weight: 700; color: var(--ink-soft); font-size: 16px; }
+  ::selection { background: var(--teal-tint); }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">Preview of the new homepage. Not linked from the live site. <a href="/">Back to the current homepage</a></div>
+
+<nav class="nav" aria-label="Main">
+  <div class="container">
+    <a class="brand" href="#top">
+      <span class="badge"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M3 21c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="3"/><path d="M21 21c0-2.5-1.5-4.5-4-5"/></svg></span>
+      BuildtheCrew
+    </a>
+    <div class="nav-links">
+      <a href="#kira">Meet Kira</a>
+      <a href="#trust">Privacy &amp; trust</a>
+      <a href="#faq">Questions</a>
+      <a class="cta" href="#get-app">Get the app</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+
+<!-- 1 · HERO -->
+<header class="hero">
+  <div class="container">
+    <div>
+      <p class="eyebrow">For families caring for someone at home</p>
+      <h1 style="margin-top:14px">Caring for Mom takes a crew. <span class="kira-word">Kira keeps the crew on track.</span></h1>
+      <p class="lede">Kira is the helper inside BuildtheCrew. She notices what's coming up, who's carrying too much, and what each person could do next. Your family decides what happens.</p>
+      <div class="actions">
+        <a class="btn" href="#get-app">Get the app</a>
+        <a class="btn ghost" href="#kira">See what Kira does</a>
+      </div>
+      <p class="note">For iPhone and Android · Sign in with your email, no password</p>
+    </div>
+    <div class="hero-visual">
+      <div class="kcard" role="img" aria-label="Example Kira card: one person is carrying a lot">
+        <div class="khead"><span class="spark">✦</span> Kira <span class="pill amber">Heads up</span></div>
+        <p class="ktitle">One person is carrying a lot.</p>
+        <p>Maya has 6 of the 9 open tasks for Mom. Daniel said he can help with calls from a distance. Move 2 of them to Daniel?</p>
+        <div class="based"><b>BASED ON</b>Maya's open tasks · Daniel: helps from a distance, phone calls</div>
+        <div class="kbtns"><span class="kb go">Move 2 tasks</span><span class="kb">Not now</span></div>
+      </div>
+      <p class="caption">A real kind of Kira card. Nothing moves until someone taps.</p>
+    </div>
+  </div>
+</header>
+
+<!-- 2 · THE INVISIBLE JOB -->
+<section class="section" aria-labelledby="problem-h">
+  <div class="container split">
+    <div class="text">
+      <p class="eyebrow">The problem</p>
+      <h2 id="problem-h">The hardest part isn't the tasks. It's keeping track of them.</h2>
+      <p>When a parent needs more help, the whole family wants to pitch in. But everyone lives somewhere different, on a different schedule, and it all runs through a <strong>group text that never stops</strong>.</p>
+      <p>Someone has to notice what's coming up, remember who said what, and ask for help. That job usually lands on <strong>one person</strong>. Nobody planned it that way.</p>
+    </div>
+    <div class="chat-mock" role="img" aria-label="A busy family group text">
+      <div class="chat-head"><span>Family · Mom</span><span class="unread">47</span></div>
+      <div class="chat-body">
+        <div class="bubble l"><div class="nm">Maya</div>Did anyone pick up Mom's prescription??</div>
+        <div class="bubble r">I thought you did?</div>
+        <div class="bubble l"><div class="nm">Daniel</div>I'm 3 hrs away, can't this week</div>
+        <div class="bubble l"><div class="nm">Maya</div>Her eye appointment moved to Thursday at 2. Can someone drive?</div>
+        <div class="bubble l"><div class="nm">Patricia</div>…</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 · MEET KIRA -->
+<section class="section alt" id="kira" aria-labelledby="kira-h">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Meet Kira</p>
+      <h2 id="kira-h">Kira does the noticing, so one person doesn't have to</h2>
+      <p>Kira is the AI helper built into BuildtheCrew. She works from what your crew puts in the app: tasks, the calendar, and what each person said they can help with. Here's what that looks like.</p>
+    </div>
+
+    <div class="moments">
+      <div class="moment">
+        <div class="mtext">
+          <span class="num">She finds plans in the chat</span>
+          <h3>"Thursday at 2" doesn't get lost</h3>
+          <p>Ask Kira to check the crew chat. She spots the appointments, visits and rides people mentioned and offers to add them to the shared calendar, quoting the message she found.</p>
+          <p class="aside">She keeps medical details off the calendar. "Eye appointment" becomes "Appointment."</p>
+        </div>
+        <div class="mvisual">
+          <div class="kcard">
+            <div class="khead"><span class="spark">✦</span> Kira</div>
+            <p>I spotted this in your chat. Add it to the calendar?</p>
+            <p class="ktitle">Appointment · Thu, 2:00 PM</p>
+            <div class="based"><b>FROM THE CHAT</b>Maya: "Her eye appointment moved to Thursday at 2."</div>
+            <div class="kbtns"><span class="kb go">Add</span><span class="kb">Dismiss</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment">
+        <div class="mtext">
+          <span class="num">She sees who's carrying it</span>
+          <h3>Someone finally notices</h3>
+          <p>When one person is doing most of the work, Kira says so, kindly. She suggests who could take something on, based on what they told the crew they can do.</p>
+          <p class="aside">She never volunteers someone just because they're doing less. People have their reasons.</p>
+        </div>
+        <div class="mvisual">
+          <div class="kcard">
+            <div class="khead"><span class="spark">✦</span> Kira <span class="pill amber">Heads up</span></div>
+            <p class="ktitle">One person is carrying a lot.</p>
+            <p>Maya has 6 of the 9 open tasks. Daniel said he can help with calls from a distance. Move 2 to Daniel?</p>
+            <div class="based"><b>BASED ON</b>Maya's open tasks · Daniel: helps from a distance, phone calls</div>
+            <div class="kbtns"><span class="kb go">Move 2 tasks</span><span class="kb">Not now</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment">
+        <div class="mtext">
+          <span class="num">She finds the gaps</span>
+          <h3>What Mom needs that nobody has said they can do</h3>
+          <p>You tell the app what your loved one needs help with. Everyone says how they can help. Kira compares the two and points out what's missing, like rides when nobody nearby drives.</p>
+        </div>
+        <div class="mvisual">
+          <div class="kcard">
+            <div class="khead"><span class="spark">✦</span> Kira <span class="pill amber">Needs you most</span></div>
+            <p>Mom needs rides, and no one nearby has said they can drive. Know someone who could help?</p>
+            <div class="kbtns"><span class="kb go">Invite someone</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment">
+        <div class="mtext">
+          <span class="num">She catches you up</span>
+          <h3>Far away, still in the loop</h3>
+          <p>Tap "Catch me up" and Kira tells you what the crew got done this week and who did it, in about 90 seconds. Then she suggests one thing you could pick up.</p>
+        </div>
+        <div class="mvisual">
+          <div class="kcard">
+            <div class="khead"><span class="spark">✦</span> Kira · Catch me up</div>
+            <ul>
+              <li>Maya handled the pharmacy pickup and two rides.</li>
+              <li>Patricia dropped off groceries on Friday.</li>
+              <li>3 things are still open. Nothing is overdue.</li>
+            </ul>
+            <div class="based"><b>ONE THING YOU COULD PICK UP</b>Call the pharmacy about the refill, due Friday</div>
+            <div class="kbtns"><span class="kb go">I'll take it</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="moment">
+        <div class="mtext">
+          <span class="num">And when things are calm</span>
+          <h3>She tells you that too</h3>
+          <p>No nagging for the sake of it. On a quiet week, Kira just tells you where things stand, so you can put the phone down.</p>
+        </div>
+        <div class="mvisual">
+          <div class="kcard">
+            <div class="khead"><span class="spark">✦</span> Kira <span class="pill green">Watching</span></div>
+            <p>Things are calm this week. Maya's carrying 3 tasks, you're on 1, and nothing's overdue.</p>
+            <div class="kbtns"><span class="kb link">Catch me up →</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 · SAME WEEK, THREE PEOPLE -->
+<section class="section" aria-labelledby="people-h">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Built for the whole crew</p>
+      <h2 id="people-h">Same week with Mom. Three different people.</h2>
+      <p>Most families have someone who does most of the caring, someone who lives far away, and a friend who'd love to help. Kira gives each of them a way in.</p>
+    </div>
+    <div class="people">
+      <div class="person">
+        <div class="who"><span class="avatar a-maya">M</span><div><b>Maya, daughter</b><span>Lives nearby · does most of it</span></div></div>
+        <div class="kcard">
+          <div class="khead"><span class="spark">✦</span> Kira <span class="pill green">Watching</span></div>
+          <p>Things are calm this week. You're on 3 of 8 tasks, Daniel and Patricia have the rest, and nothing's overdue.</p>
+        </div>
+        <p class="feel">Not doing it all anymore</p>
+      </div>
+      <div class="person">
+        <div class="who"><span class="avatar a-dan">D</span><div><b>Daniel, son</b><span>Three hours away · weekends</span></div></div>
+        <div class="kcard">
+          <div class="khead"><span class="spark">✦</span> Kira · Catch me up</div>
+          <ul>
+            <li>Maya took Mom to two appointments.</li>
+            <li>Patricia did the grocery run.</li>
+          </ul>
+          <div class="based"><b>ONE THING YOU COULD PICK UP</b>Call the pharmacy about the refill</div>
+        </div>
+        <p class="feel">In the loop, from a distance</p>
+      </div>
+      <div class="person">
+        <div class="who"><span class="avatar a-pat">P</span><div><b>Patricia, friend</b><span>Next door · errands and visits</span></div></div>
+        <div class="kcard">
+          <div class="khead"><span class="spark">✦</span> Kira <span class="pill teal">For you</span></div>
+          <p>Here's something you could pick up, since you said you can help with errands:</p>
+          <div class="based"><b>YOU COULD</b>Grocery run for Mom, due Saturday</div>
+        </div>
+        <p class="feel">Asked for the right thing, no pressure</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · TRUST -->
+<section class="section alt" id="trust" aria-labelledby="trust-h">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Privacy &amp; trust</p>
+      <h2 id="trust-h">Kira suggests. Your family decides.</h2>
+      <p>Caring for a parent is personal. Kira was built with firm limits, and she keeps to them.</p>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <div><h3>Nothing happens without a tap</h3><p>Kira never moves, assigns or adds anything on her own. Every suggestion waits for someone in the crew to say yes.</p></div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></span>
+        <div><h3>She shows her work</h3><p>Every suggestion says what it's based on: which tasks, which message, what someone said they can do. If she isn't sure, she asks instead of guessing.</p></div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10z"/></svg></span>
+        <div><h3>She stays out of medical</h3><p>Kira helps with coordination: who's doing what, and when. She doesn't give medical advice, and she keeps health details out of her summaries and the calendar.</p></div>
+      </div>
+      <div class="trust-item">
+        <span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <div><h3>She reads the chat only when asked</h3><p>Kira looks at what your crew wrote only when someone asks her to check the chat for plans. Your crew's information is never sold.</p></div>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:15px;color:var(--ink-soft)">Read the details in our <a href="/privacy-policy/">privacy policy</a>.</p>
+  </div>
+</section>
+
+<!-- 6 · LOVED ONE -->
+<section class="section" aria-labelledby="loved-h">
+  <div class="container split">
+    <div class="text">
+      <p class="eyebrow">Your loved one, included</p>
+      <h2 id="loved-h">Mom gets a seat at the table</h2>
+      <p>Invite the person you're caring for to join with their own simple view. They can see what the crew is doing and <strong>ask for something in one line</strong>, no forms or categories.</p>
+      <p>Some things are for the crew only. Mark a task private and they won't see it.</p>
+    </div>
+    <div class="ask-mock" role="img" aria-label="The loved one's Ask for something screen">
+      <p class="hi">Hi Bea 👋</p>
+      <p class="sub">Ask your crew for something</p>
+      <div class="field">Could someone help me change the smoke alarm battery?</div>
+      <div class="send">Send to my crew</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · WHERE KIRA WORKS -->
+<section class="section alt" aria-labelledby="tools-h">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Everything in one place</p>
+      <h2 id="tools-h">Where Kira works</h2>
+      <p>The everyday tools your crew needs, in one app instead of five. Kira works across all of them.</p>
+    </div>
+    <div class="tools">
+      <div class="tool"><h3>Crew chat</h3><p>One private conversation for everyone helping.</p><p class="kira-adds">Kira can find plans in it.</p></div>
+      <div class="tool"><h3>Tasks</h3><p>What needs doing, who's on it, and when it's due.</p><p class="kira-adds">Kira suggests who could take what.</p></div>
+      <div class="tool"><h3>Calendar</h3><p>Appointments, visits and rides everyone can see.</p><p class="kira-adds">Kira adds what she finds, once you say yes.</p></div>
+      <div class="tool"><h3>Your crew</h3><p>Who's helping, and how each person can help.</p><p class="kira-adds">Kira points out what's missing.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 · GET STARTED -->
+<section class="section" id="get-app" aria-labelledby="start-h">
+  <div class="container">
+    <div class="start">
+      <div>
+        <h2 id="start-h">Start your crew in about three minutes</h2>
+        <p class="lead">One person sets it up. Everyone else joins from an invite.</p>
+        <div class="stores">
+          <a class="store" href="https://apps.apple.com/app/id6836365125" rel="noopener">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.37 12.6c-.02-2.1 1.72-3.12 1.8-3.17-0.98-1.43-2.5-1.63-3.04-1.65-1.29-.13-2.52.76-3.18.76-.66 0-1.67-.74-2.75-.72-1.41.02-2.72.82-3.44 2.09-1.47 2.55-.38 6.32 1.05 8.39.7 1.01 1.53 2.15 2.62 2.11 1.05-.04 1.45-.68 2.72-.68 1.27 0 1.63.68 2.74.66 1.13-.02 1.85-1.03 2.54-2.05.8-1.17 1.13-2.31 1.15-2.37-.03-.01-2.2-.85-2.21-3.37zM14.29 6.42c.58-.7.97-1.68.86-2.65-.83.03-1.84.55-2.44 1.25-.53.62-1 1.62-.88 2.57.93.07 1.88-.47 2.46-1.17z"/></svg>
+            <span class="lbl"><small>Download on the</small><span>App Store</span></span>
+          </a>
+          <a class="store" href="https://play.google.com/store/apps/details?id=com.buildthecrew.app" rel="noopener">
+            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#34A853" d="M3.6 2.3 13.5 12l-9.9 9.7c-.35-.2-.6-.6-.6-1.1V3.4c0-.5.25-.9.6-1.1z"/><path fill="#FBBC04" d="m16.8 15.3-3.3-3.3 3.3-3.3 3.7 2.1c1 .6 1 1.8 0 2.4l-3.7 2.1z"/><path fill="#EA4335" d="M13.5 12 3.6 21.7c.3.2.8.2 1.3-.1l11.9-6.3-3.3-3.3z"/><path fill="#4285F4" d="M13.5 12 16.8 8.7 4.9 2.4c-.5-.3-1-.3-1.3-.1L13.5 12z"/></svg>
+            <span class="lbl"><small>Get it on</small><span>Google Play</span></span>
+          </a>
+        </div>
+        <p class="fine">Questions? Visit <a href="/support.html" style="color:#fff">Support</a> or email support@buildthecrew.com.</p>
+      </div>
+      <ol>
+        <li><div><b>Add the person you care for.</b> <span>Their name and what they need help with.</span></div></li>
+        <li><div><b>Say how you can help.</b> <span>When you're free and what you can take on.</span></div></li>
+        <li><div><b>Invite your crew.</b> <span>Family, friends, neighbors. Each one says how they can help.</span></div></li>
+        <li><div><b>Kira gets to work.</b> <span>Suggestions start showing up on everyone's Home screen.</span></div></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- 9 · FAQ -->
+<section class="section alt" id="faq" aria-labelledby="faq-h">
+  <div class="container">
+    <div class="section-head center">
+      <p class="eyebrow">Questions families ask</p>
+      <h2 id="faq-h">Good questions</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>Who is Kira?</summary>
+        <p>Kira is the AI helper built into BuildtheCrew. She looks at your crew's tasks, calendar and what each person said they can help with, and suggests what to do next. She's not a person, and she never acts on her own.</p>
+      </details>
+      <details>
+        <summary>Is Kira reading our messages?</summary>
+        <p>Only when someone asks her to check the chat for plans like appointments or rides. Then she shows you exactly which message she found. The rest of the time she doesn't read what you write.</p>
+      </details>
+      <details>
+        <summary>Does Kira give medical advice?</summary>
+        <p>No. Kira helps with coordination: who's doing what, and when. She doesn't give medical advice and keeps health details out of her summaries and the calendar. Always talk to your loved one's doctor about medical questions.</p>
+      </details>
+      <details>
+        <summary>Can Kira change things without asking?</summary>
+        <p>No. Kira suggests, and someone in your crew taps to say yes. She never moves a task, assigns someone, or adds to the calendar on her own.</p>
+      </details>
+      <details>
+        <summary>Can friends and neighbors join, or only family?</summary>
+        <p>Anyone who helps can join: family, friends, neighbors. Each person says how they can help, so Kira only suggests things that fit them.</p>
+      </details>
+      <details>
+        <summary>My mom isn't great with phones. Can she still be part of it?</summary>
+        <p>Yes. Your loved one can join with a simple view that shows what the crew is doing and lets them ask for something in one line. They don't have to join for the crew to work, though.</p>
+      </details>
+      <details>
+        <summary>Do I need a password?</summary>
+        <p>No. You sign in with your email and a code we send you.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <p class="fb">BuildtheCrew</p>
+    <p>Care for the people you love, together. Built with families, for families.</p>
+    <p><a href="/privacy-policy/">Privacy</a> · <a href="/support.html">Support</a> · <a href="/delete-account.html">Delete account</a></p>
+    <p>© 2026 Build the Crew Inc.</p>
+  </div>
+</footer>
+
+</body>
+</html>
